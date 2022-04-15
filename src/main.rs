@@ -39,15 +39,12 @@ fn movement(mut query: Query<(&Speed, &mut Transform)>) {
 
 fn collision_detection(mut events: EventReader<CollisionEvent>) {
     for event in events.iter() {
-        match event {
-            CollisionEvent::Started(d1, d2) => {
-                info!(
-                    "normal count 1: {}, normal count 2: {}",
-                    d1.normals().len(),
-                    d2.normals().len()
-                );
-            }
-            _ => {}
+        if let CollisionEvent::Started(d1, d2) = event {
+            info!(
+                "normal count 1: {}, normal count 2: {}",
+                d1.normals().len(),
+                d2.normals().len()
+            );
         }
     }
 }
